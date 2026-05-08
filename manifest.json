@@ -1,0 +1,9 @@
+{
+  "name":"Stationery Hub",
+  "short_name":"Hub",
+  "theme_color":"#0D0D0D",
+  "background_color":"#0D0D0D",
+  "display":"standalone",
+  "start_url":"/",
+  "icons":[]
+}
