@@ -41,3 +41,97 @@ document.addEventListener('mousemove',(e)=>{
   glow.style.top = e.clientY + 'px';
 
 });
+// ===========================
+// SIGNUP
+// ===========================
+
+async function signup() {
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  try {
+
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    alert("Account created!");
+
+  } catch (err) {
+
+    alert(err.message);
+
+  }
+
+}
+
+// ===========================
+// LOGIN
+// ===========================
+
+async function login() {
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  try {
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    alert("Logged in!");
+
+  } catch (err) {
+
+    alert(err.message);
+
+  }
+
+}
+
+// ===========================
+// LOGOUT
+// ===========================
+
+async function logout() {
+
+  await signOut(auth);
+
+  alert("Logged out");
+
+}
+
+// ===========================
+// SESSION TRACKER
+// ===========================
+
+onAuthStateChanged(auth, (user) => {
+
+  const status =
+    document.getElementById("userStatus");
+
+  if (user) {
+
+    status.innerText =
+      "LOGGED IN: " + user.email;
+
+  } else {
+
+    status.innerText =
+      "NOT LOGGED IN";
+
+  }
+
+});
