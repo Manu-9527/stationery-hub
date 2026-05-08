@@ -719,3 +719,40 @@ body::after{
 
   z-index:-1;
 }
+.auth-box{
+
+display:flex;
+gap:10px;
+padding:20px;
+flex-wrap:wrap;
+border-bottom:1px solid #222;
+
+}
+
+.auth-box input{
+
+background:black;
+border:1px solid #333;
+padding:10px;
+color:white;
+
+}
+
+.auth-box button{
+
+background:white;
+color:black;
+border:none;
+padding:10px 16px;
+cursor:pointer;
+
+}
+
+#userStatus{
+
+font-size:12px;
+letter-spacing:1px;
+color:#999;
+padding-top:10px;
+
+}
