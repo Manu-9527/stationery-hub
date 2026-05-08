@@ -643,3 +643,11 @@ html{
     transform:none;
   }
 }
+.card,
+.buy-btn,
+.hero,
+.reveal{
+  will-change:
+    transform,
+    opacity;
+}
