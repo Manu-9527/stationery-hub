@@ -548,3 +548,10 @@ footer{border-top:1px solid var(--border);padding:2rem;margin-top:2rem}
     gap:1rem;
   }
 }
+*{
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  scroll-behavior:smooth;
+}
