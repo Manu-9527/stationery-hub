@@ -691,6 +691,64 @@ calcSmoothness();
 calcFatigue();
 calcMatcher();
 </script>
-<script type="module" src="app.js"></script>
+</script>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getDatabase
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyCGi4MIBDcs5Z3DtPYfEWzKH0c9P19ORC0",
+
+  authDomain: "stationery-hub-80895.firebaseapp.com",
+
+  databaseURL: "https://stationery-hub-80895-default-rtdb.asia-southeast1.firebasedatabase.app/",
+
+  projectId: "stationery-hub-80895",
+
+  storageBucket: "stationery-hub-80895.firebasestorage.app",
+
+  messagingSenderId: "368432976126",
+
+  appId: "1:368432976126:web:71361a16bfd3ae178dd5af"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+
+const auth = getAuth(app);
+
+window.auth = auth;
+
+window.createUserWithEmailAndPassword =
+createUserWithEmailAndPassword;
+
+window.signInWithEmailAndPassword =
+signInWithEmailAndPassword;
+
+window.signOut = signOut;
+
+window.onAuthStateChanged = onAuthStateChanged;
+
+</script>
+
+<script src="app.js"></script>
+
+</body>
 </body>
 </html>
