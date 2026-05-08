@@ -1,4 +1,4 @@
-
+import { db, auth } from "./firebase.js";
 /* SCROLL REVEAL */
 
 const revealElements = document.querySelectorAll(
