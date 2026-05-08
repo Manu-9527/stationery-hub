@@ -651,3 +651,9 @@ html{
     transform,
     opacity;
 }
+::selection{
+  background:
+    rgba(214,185,138,0.25);
+
+  color:white;
+}
