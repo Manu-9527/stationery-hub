@@ -312,7 +312,9 @@ footer{border-top:1px solid var(--border);padding:2rem;margin-top:2rem}
   }
 
   .buy-btn{
-  font-size:9px;
+  box-shadow:
+  0 10px 30px rgba(255,255,255,0.06);
+    font-size:9px;
   letter-spacing:2px;
 
   color:var(--bg);
@@ -616,4 +618,28 @@ html{
 .card:hover img{
   transform:scale(1.04);
   filter:brightness(1.08);
+}
+/* HERO ENTRANCE */
+
+.hero-title{
+  animation:
+    heroFade 1.2s cubic-bezier(.2,.8,.2,1);
+}
+
+.hero-sub{
+  animation:
+    heroFade 1.5s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes heroFade{
+
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+  }
 }
