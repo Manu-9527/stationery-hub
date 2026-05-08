@@ -17,7 +17,9 @@
 --shadow:rgba(0,0,0,0.45);
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.6}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.6
+    overflow-x:hidden;
+    }
 a{color:inherit;text-decoration:none}
 
 /* NAV */
@@ -554,4 +556,64 @@ footer{border-top:1px solid var(--border);padding:2rem;margin-top:2rem}
 
 html{
   scroll-behavior:smooth;
+}
+/* REVEAL ANIMATIONS */
+
+.reveal{
+  opacity:0;
+
+  transform:
+    translateY(40px)
+    scale(.98);
+
+  transition:
+    opacity .9s cubic-bezier(.2,.8,.2,1),
+    transform .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.active{
+  opacity:1;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+/* STAGGER */
+
+.product-grid .card{
+  transition-delay:0s;
+}
+
+.product-grid .card:nth-child(1){transition-delay:.05s}
+.product-grid .card:nth-child(2){transition-delay:.1s}
+.product-grid .card:nth-child(3){transition-delay:.15s}
+.product-grid .card:nth-child(4){transition-delay:.2s}
+.product-grid .card:nth-child(5){transition-delay:.25s}
+.product-grid .card:nth-child(6){transition-delay:.3s}
+
+/* FLOATING HOVER */
+
+.card{
+  transform-style:preserve-3d;
+}
+
+.card:hover{
+  transform:
+    translateY(-10px)
+    rotateX(2deg)
+    rotateY(-2deg);
+}
+
+/* PREMIUM IMAGE MOTION */
+
+.card img{
+  transition:
+    transform .6s ease,
+    filter .6s ease;
+}
+
+.card:hover img{
+  transform:scale(1.04);
+  filter:brightness(1.08);
 }
