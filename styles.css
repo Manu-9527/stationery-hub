@@ -657,3 +657,43 @@ html{
 
   color:white;
 }
+body::before{
+  content:'';
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(214,185,138,0.06),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at bottom right,
+      rgba(255,255,255,0.03),
+      transparent 40%
+    );
+
+  pointer-events:none;
+
+  z-index:-1;
+}
+body::after{
+  content:'';
+
+  position:fixed;
+
+  inset:0;
+
+  opacity:.035;
+
+  background-image:
+    url("https://grainy-gradients.vercel.app/noise.svg");
+
+  pointer-events:none;
+
+  z-index:-1;
+}
