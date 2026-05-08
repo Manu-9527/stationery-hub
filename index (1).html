@@ -190,6 +190,16 @@ tr:hover td{background:var(--bg2);color:var(--text)}
 .verdict-text{font-size:11px;color:var(--text3);line-height:2;max-width:480px}
 .verdict-recommendation{margin-top:12px;font-size:9px;color:var(--text2);border-left:2px solid var(--border2);padding-left:12px;line-height:1.8}
 
+.hidden-anim{
+  opacity:0;
+  transform:translateY(30px);
+  transition:all .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.show{
+  opacity:1;
+  transform:none;
+} 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:2rem;margin-top:2rem}
 .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
@@ -200,6 +210,80 @@ footer{border-top:1px solid var(--border);padding:2rem;margin-top:2rem}
 .footer-note{font-size:8px;letter-spacing:0.5px;color:var(--text4);margin-top:1rem;padding:0 2rem;max-width:1100px;margin:1rem auto 0;line-height:1.8}
 
 @media(max-width:640px){
+  @media (max-width: 768px){
+
+  body{
+    font-size:13px;
+  }
+
+  nav{
+    padding:1rem;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .nav-right{
+    width:100%;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .nav-links{
+    width:100%;
+    justify-content:space-between;
+  }
+
+  .search-wrap input{
+    width:100%;
+  }
+
+  .hero-title{
+    font-size:42px;
+    line-height:1.1;
+  }
+
+  .hero-sub{
+    font-size:12px;
+    line-height:1.9;
+  }
+
+  .product-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+    background:none;
+  }
+
+  .card{
+    padding:1.2rem;
+  }
+
+  .pros-cons{
+    grid-template-columns:1fr;
+  }
+
+  .spec-row{
+    grid-template-columns:60px 1fr 40px;
+  }
+
+  .card-footer{
+    gap:12px;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .buy-btn{
+    width:100%;
+    text-align:center;
+  }
+
+  table{
+    min-width:800px;
+  }
+
+  .calc-grid{
+    grid-template-columns:1fr;
+  }
+}
   nav{padding:0.75rem 1rem}
   .search-wrap input{width:160px}
   .hero{padding:2.5rem 1rem 2rem}
@@ -225,7 +309,7 @@ footer{border-top:1px solid var(--border);padding:2rem;margin-top:2rem}
       <a href="#calculators">TOOLS</a>
     </div>
     <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="SEARCH PENCILS..." oninput="handleSearch()" autocomplete="off">
+      <input type="text" id="searchInput" placeholder="SEARCH PENCILS..." oninput="debouncedSearch()" autocomplete="off">
       <span class="search-icon">⌕</span>
     </div>
   </div>
@@ -844,6 +928,20 @@ loadProducts();
 calcSmoothness();
 calcFatigue();
 calcMatcher();
+</script>
+<script>
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  })
+},{threshold:0.15});
+
+ document.querySelectorAll('.card,.section-header,.calc-panel').forEach(el=>{
+   el.classList.add('hidden-anim');
+   observer.observe(el);
+ })
 </script>
 </body>
 </html>
