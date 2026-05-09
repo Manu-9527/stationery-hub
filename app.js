@@ -127,7 +127,7 @@ onAuthStateChanged(auth, (user) => {
 
     status.innerText =
       "LOGGED IN: " + user.email;
-
+      loadFavorites(user);
   } else {
 
     status.innerText =
