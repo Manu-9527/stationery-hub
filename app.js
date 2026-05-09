@@ -1,3 +1,4 @@
+let favorites = [];
 import { db, auth } from "./firebase.js";
 /* SCROLL REVEAL */
 
