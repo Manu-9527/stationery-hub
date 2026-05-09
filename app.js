@@ -175,3 +175,21 @@ async function toggleFavorite(productName) {
   renderProducts(allProducts);
 
 }
+function loadFavorites(user) {
+
+  const favRef =
+    ref(db, `users/${user.uid}/favorites`);
+
+  onValue(favRef, (snapshot) => {
+
+    const data = snapshot.val();
+
+    favorites = data
+      ? Object.keys(data)
+      : [];
+
+    renderProducts(allProducts);
+
+  });
+
+}
