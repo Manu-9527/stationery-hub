@@ -136,3 +136,42 @@ onAuthStateChanged(auth, (user) => {
   }
 
 });
+// ===========================
+// FAVORITES
+// ===========================
+
+async function toggleFavorite(productName) {
+
+  const user = auth.currentUser;
+
+  if (!user) {
+
+    alert("Please login first.");
+
+    return;
+
+  }
+
+  const favRef = ref(
+    db,
+    `users/${user.uid}/favorites/${productName}`
+  );
+
+  if (favorites.includes(productName)) {
+
+    await remove(favRef);
+
+    favorites =
+      favorites.filter(x => x !== productName);
+
+  } else {
+
+    await set(favRef, true);
+
+    favorites.push(productName);
+
+  }
+
+  renderProducts(allProducts);
+
+}
