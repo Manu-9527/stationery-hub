@@ -486,11 +486,11 @@ function renderProducts(products) {
     return `
     <div class="card" data-brand="${p.brand}" data-name="${p.name.toLowerCase()}" data-weight="${p.weight}" data-price="${p.priceUSD}">
       <div class="card-top">
-     <button
-class="favorite-btn ${favorites.includes(p.name) ? 'favorite-active' : ''}"
-onclick="toggleFavorite('${p.name}')"
+    <button
+  class="favorite-btn"
+  onclick="toggleFavorite('${p.name}')"
 >
-♥
+  ♥
 </button>
         <div class="card-brand">${p.brand}</div>
         <div class="card-price-tag">$${p.priceUSD.toFixed(2)}</div>
