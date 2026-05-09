@@ -210,3 +210,22 @@ favorites.push(productName);
 renderProducts(allProducts);
 
 }
+// LOGIN MODAL
+
+const loginBtn = document.getElementById("loginBtn");
+const loginModal = document.getElementById("loginModal");
+const closeLogin = document.getElementById("closeLogin");
+
+loginBtn.onclick = () => {
+  loginModal.style.display = "flex";
+};
+
+closeLogin.onclick = () => {
+  loginModal.style.display = "none";
+};
+
+window.onclick = (e) => {
+  if(e.target === loginModal){
+    loginModal.style.display = "none";
+  }
+};
