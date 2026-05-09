@@ -756,3 +756,28 @@ color:#999;
 padding-top:10px;
 
 }
+.favorite-btn{
+position:absolute;
+top:16px;
+right:16px;
+width:42px;
+height:42px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,0.08);
+background:#111;
+color:#888;
+font-size:18px;
+cursor:pointer;
+transition:0.25s;
+}
+
+.favorite-btn:hover{
+transform:scale(1.08);
+color:white;
+}
+
+.favorite-active{
+color:#ff4d6d;
+border-color:#ff4d6d;
+box-shadow:0 0 18px rgba(255,77,109,0.4);
+}
