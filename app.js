@@ -236,3 +236,55 @@ window.onclick = (e) => {
     loginModal.style.display = "none";
   }
 };
+// =========================
+// LOGIN MODAL
+// =========================
+
+window.openLogin = function () {
+  document.getElementById("loginModal").style.display = "flex";
+};
+
+window.closeLogin = function () {
+  document.getElementById("loginModal").style.display = "none";
+};
+
+// =========================
+// LIGHT MODE
+// =========================
+
+window.toggleTheme = function () {
+
+  document.body.classList.toggle("light-mode");
+
+  const current =
+    document.body.classList.contains("light-mode")
+      ? "light"
+      : "dark";
+
+  localStorage.setItem("theme", current);
+};
+
+// Load saved theme
+
+const savedTheme = localStorage.getItem("theme");
+
+if(savedTheme === "light"){
+  document.body.classList.add("light-mode");
+}
+
+// =========================
+// FONT SWITCHER
+// =========================
+
+window.changeFont = function(font){
+
+  document.body.style.fontFamily = font;
+
+  localStorage.setItem("font", font);
+};
+
+const savedFont = localStorage.getItem("font");
+
+if(savedFont){
+  document.body.style.fontFamily = savedFont;
+}
