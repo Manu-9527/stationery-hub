@@ -824,7 +824,52 @@ window.onValue = onValue;
   </div>
 
 </div>
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+
+  <div class="modal-box">
+
+    <button class="close-modal" onclick="closeLogin()">✕</button>
+
+    <h2>WELCOME</h2>
+
+    <p class="modal-sub">
+      Sign in to save favorites and sync your collection.
+    </p>
+
+    <button class="google-btn" id="googleLoginBtn">
+      Continue with Google
+    </button>
+
+  </div>
+
+</div>
+
+<!-- SETTINGS PANEL -->
+<div class="settings-panel">
+
+  <button onclick="toggleTheme()">
+    🌙 Theme
+  </button>
+
+  <button onclick="changeFont('IBM Plex Mono')">
+    Mono
+  </button>
+
+  <button onclick="changeFont('Poppins')">
+    Modern
+  </button>
+
+  <button onclick="changeFont('Inter')">
+    Clean
+  </button>
+
+</div>
+
 <script type="module" src="app.js"></script>
+</body>
+</html>
+  <script type="module" src="app.js"></script>
 
 </body>
 </body>
