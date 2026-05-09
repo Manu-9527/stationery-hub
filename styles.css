@@ -781,3 +781,10 @@ color:#ff4d6d;
 border-color:#ff4d6d;
 box-shadow:0 0 18px rgba(255,77,109,0.4);
 }
+.favorite-btn{
+  background:none;
+  border:none;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
