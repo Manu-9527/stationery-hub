@@ -193,3 +193,20 @@ function loadFavorites(user) {
   });
 
 }
+function toggleFavorite(productName){
+
+if(favorites.includes(productName)){
+
+favorites = favorites.filter(
+item => item !== productName
+);
+
+}else{
+
+favorites.push(productName);
+
+}
+
+renderProducts(allProducts);
+
+}
