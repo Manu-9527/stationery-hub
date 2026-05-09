@@ -707,7 +707,28 @@ function calcMatcher() {
 // ============================================================
 // INIT
 // ============================================================
-loadProducts();
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+function toggleFavorite(productName) {
+
+  if (favorites.includes(productName)) {
+
+    favorites = favorites.filter(f => f !== productName);
+
+  } else {
+
+    favorites.push(productName);
+
+  }
+
+  localStorage.setItem(
+    'favorites',
+    JSON.stringify(favorites)
+  );
+
+  renderProducts(allProducts);
+}
+  loadProducts();
 calcSmoothness();
 calcFatigue();
 calcMatcher();
