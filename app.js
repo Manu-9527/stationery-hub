@@ -1,3 +1,10 @@
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 let favorites = [];
 import { db, auth } from "./firebase.js";
 /* SCROLL REVEAL */
