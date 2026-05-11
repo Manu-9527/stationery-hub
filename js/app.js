@@ -1,4 +1,58 @@
 // ==========================================================================
+// 0. FIREBASE BACKEND (AUTH & DATABASE)
+// ==========================================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getDatabase, ref, set, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+// Your exact Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyCGi4MIBDcs5Z3DtPYfEWzKH0c9P19ORC0",
+  authDomain: "stationery-hub-80895.firebaseapp.com",
+  databaseURL: "https://stationery-hub-80895-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  projectId: "stationery-hub-80895",
+  storageBucket: "stationery-hub-80895.firebasestorage.app",
+  messagingSenderId: "368432976126",
+  appId: "1:368432976126:web:71361a16bfd3ae178dd5af"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+const provider = new GoogleAuthProvider();
+
+// Connect to HTML Buttons
+const navLoginBtn = document.getElementById('loginBtn');
+const googleBtn = document.getElementById('googleLoginBtn');
+
+// Handle Google Login
+if(googleBtn) {
+  googleBtn.addEventListener('click', async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      document.getElementById('loginModal').style.display = "none"; // Close modal on success
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  });
+}
+
+// Listen for Login/Logout state
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    navLoginBtn.textContent = "SIGN OUT";
+    navLoginBtn.onclick = () => signOut(auth);
+    console.log("Logged in as:", user.email);
+    // Here we would load their saved favorites from the DB!
+  } else {
+    navLoginBtn.textContent = "SIGN IN";
+    navLoginBtn.onclick = () => {
+      document.getElementById('loginModal').style.display = "flex";
+    };
+  }
+});
+// ==========================================================================
 // 1. THE PREMIUM TAB SWITCHER (Segmented Controls)
 // ==========================================================================
 // This handles the smooth switching between your 3 calculators
