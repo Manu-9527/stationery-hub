@@ -147,11 +147,11 @@ nav {
 .hero-title {
   font-size: clamp(48px, 8vw, 84px);
   font-weight: 700;
-  letter-spacing: -0.03em; /* Tighter letter spacing looks more premium */
+  letter-spacing: -0.03em; 
   line-height: 1.05;
   margin-bottom: 1.5rem;
-  /* This creates a subtle gradient on the text itself */
-  background: linear-gradient(180deg, #FFFFFF 0%, #A1A1A6 100%);
+  /* Silver to Gold Luxury Gradient */
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; 
 }
