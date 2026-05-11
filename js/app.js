@@ -22,33 +22,61 @@ const auth = getAuth(app);
 const db = getDatabase(app);
 const provider = new GoogleAuthProvider();
 
-// Connect to HTML Buttons
+// ==========================================================================
+// NEW: SMOOTH LOGIN MODAL & FIREBASE LOGIC
+// ==========================================================================
 const navLoginBtn = document.getElementById('loginBtn');
 const googleBtn = document.getElementById('googleLoginBtn');
+const loginModal = document.getElementById('loginModal');
+const closeModalBtn = document.querySelector('.close-modal');
 
-// Handle Google Login
+// 1. Ensure modal is safely hidden on load
+if (loginModal) {
+  loginModal.classList.remove('active');
+  
+  // Close modal if user clicks the dark blurred background
+  loginModal.addEventListener('click', (e) => {
+    if(e.target === loginModal) {
+      loginModal.classList.remove('active');
+      setTimeout(() => loginModal.style.display = 'none', 400); 
+    }
+  });
+}
+
+// 2. Handle the Close Button ('X')
+if (closeModalBtn) {
+  closeModalBtn.onclick = () => {
+    loginModal.classList.remove('active');
+    setTimeout(() => loginModal.style.display = 'none', 400);
+  };
+}
+
+// 3. Handle Actual Google Login
 if(googleBtn) {
   googleBtn.addEventListener('click', async () => {
     try {
       await signInWithPopup(auth, provider);
-      document.getElementById('loginModal').style.display = "none"; // Close modal on success
+      // Close modal smoothly on success
+      loginModal.classList.remove('active');
+      setTimeout(() => loginModal.style.display = 'none', 400);
     } catch (error) {
       console.error("Login failed:", error);
     }
   });
 }
 
-// Listen for Login/Logout state
+// 4. Listen for Login/Logout state
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    // User is logged in
     navLoginBtn.textContent = "SIGN OUT";
     navLoginBtn.onclick = () => signOut(auth);
-    console.log("Logged in as:", user.email);
-    // Here we would load their saved favorites from the DB!
   } else {
+    // User is logged out -> clicking SIGN IN opens the smooth modal
     navLoginBtn.textContent = "SIGN IN";
     navLoginBtn.onclick = () => {
-      document.getElementById('loginModal').style.display = "flex";
+      loginModal.style.display = "flex";
+      setTimeout(() => loginModal.classList.add('active'), 10); 
     };
   }
 });
