@@ -328,3 +328,141 @@ tr:hover td {
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 500;
 }
+/* ==========================================================================
+   6. INTERACTIVE TOOLS & CALCULATORS
+   ========================================================================== */
+/* The pill-shaped container for the tabs */
+.calc-tabs {
+  display: inline-flex;
+  background: var(--bg-secondary);
+  padding: 6px;
+  border-radius: 99px; /* This creates the perfect pill shape */
+  border: 1px solid var(--glass-border);
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* The individual tab buttons */
+.calc-tab {
+  flex: 1; /* Makes all tabs equal width */
+  font-size: 11px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 12px 20px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 99px; /* Matches the container */
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* The Active State (When a tab is selected) */
+.calc-tab.active {
+  color: var(--bg-primary); /* Text becomes black */
+  background: var(--text-primary); /* Button becomes white */
+  box-shadow: var(--shadow-soft);
+}
+
+.calc-tab:hover:not(.active) {
+  color: var(--text-primary);
+}
+/* The panel that holds the calculator */
+.calc-panel {
+  display: none; /* Hidden by default via JS */
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 3rem;
+  animation: fadeUp 0.5s ease backwards; /* Smooth entry animation */
+}
+
+.calc-panel.active {
+  display: block;
+}
+
+.calc-header {
+  margin-bottom: 2.5rem;
+}
+
+.calc-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.calc-title {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Customizing the dropdown menus */
+.calc-field label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.calc-field select {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  outline: none;
+  cursor: pointer;
+  appearance: none; /* Removes default browser styling */
+  transition: border 0.3s ease;
+}
+
+.calc-field select:focus {
+  border-color: var(--text-primary); /* White border on focus */
+}
+
+/* The Big Score Output at the bottom */
+.calc-output {
+  border-top: 1px solid var(--glass-border);
+  padding-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.score-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 64px;
+  font-weight: 300; /* Thin font for massive numbers looks very premium */
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.score-bar {
+  height: 4px;
+  background: var(--text-primary);
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Add this keyframe to the very bottom of your CSS file */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
