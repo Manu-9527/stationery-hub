@@ -62,35 +62,20 @@ content="Manu Yadav"
 <body>
 
 <nav>
-  <div class="auth-box">
-
-  <input type="email" id="email" placeholder="EMAIL">
-
-  <input type="password" id="password" placeholder="PASSWORD">
-
-  <button onclick="signup()">SIGN UP</button>
-
-  <button onclick="login()">LOGIN</button>
-
-  <button onclick="logout()">LOGOUT</button>
-
-  <div id="userStatus">NOT LOGGED IN</div>
-
-</div>
   <div class="logo">STATIONERY HUB</div>
+  
+  <div class="nav-links">
+    <a href="#pencils">PENCILS</a>
+    <a href="#compare">COMPARE</a>
+    <a href="#calculators">TOOLS</a>
+  </div>
+
   <div class="nav-right">
-    <button id="loginBtn" class="login-btn">
-  LOGIN
-</button>
-    <div class="nav-links">
-      <a href="#pencils">PENCILS</a>
-      <a href="#compare">COMPARE</a>
-      <a href="#calculators">TOOLS</a>
-    </div>
     <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="SEARCH PENCILS..." oninput="debouncedSearch()" autocomplete="off">
+      <input type="text" id="searchInput" placeholder="Search..." oninput="debouncedSearch()">
       <span class="search-icon">⌕</span>
     </div>
+    <button id="loginBtn" class="login-btn">SIGN IN</button>
   </div>
 </nav>
 
