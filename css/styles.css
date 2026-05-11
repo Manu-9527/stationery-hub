@@ -270,3 +270,61 @@ nav {
   background: var(--accent);
   transform: scale(1.05);
 }
+/* ==========================================================================
+   5. SIDE-BY-SIDE COMPARISON TABLE
+   ========================================================================== */
+.comparison {
+  overflow-x: auto; /* Allows scrolling on mobile */
+  margin-top: 2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px; /* Matches the product cards */
+  padding: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Removes default HTML double borders */
+  font-size: 14px;
+}
+
+/* Table Headers (The Top Row) */
+th {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--glass-border);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+th:hover {
+  color: var(--text-primary); /* Highlights when user hovers to sort */
+}
+
+/* Table Data Cells */
+td {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02); /* Extremely faint line */
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+/* Hover Effect for Entire Rows */
+tr:hover td {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  cursor: default;
+}
+
+/* Highlight the 'Best' values in gold */
+.best-val {
+  color: var(--accent);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+}
