@@ -328,7 +328,42 @@
     .spec-bar-fill { height: 100%; background: var(--text-secondary); border-radius: 2px; }
     .spec-val { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--accent); text-align: right; }
 
-    .card-footer { margin-top: auto; padding-top: 1.5rem;}
+    /* PROS & CONS */
+    .pros-cons {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px; 
+      background: var(--glass-border); margin-bottom: 1rem; margin-top: 1.5rem;
+      border-radius: 12px; overflow: hidden; flex: 1;
+    }
+    .pros, .cons { background: rgba(0,0,0,0.4); padding: 1.2rem 1rem; }
+    .pc-label { font-size: 9px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; font-weight: 600; }
+    .pros .pc-label { color: #8bbd8b; }
+    .cons .pc-label { color: #bd8b8b; }
+    .pc-list { list-style: none; }
+    .pc-list li { font-size: 11px; color: var(--text-secondary); line-height: 1.6; padding-left: 14px; position: relative; margin-bottom: 8px; }
+    .pros .pc-list li::before { content: '+'; position: absolute; left: 0; color: #8bbd8b; font-family: monospace; }
+    .cons .pc-list li::before { content: '−'; position: absolute; left: 0; color: #bd8b8b; font-family: monospace; }
+
+    /* SPEC SHEET TOGGLE */
+    .toggle-specs {
+      background: transparent; color: var(--text-tertiary); border: none; 
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 2px; 
+      text-transform: uppercase; padding: 16px 0 0 0; margin-top: 1rem; 
+      border-top: 1px solid var(--glass-border); cursor: pointer; transition: color 0.3s ease; 
+      width: 100%; text-align: center;
+    }
+    .toggle-specs:hover { color: var(--accent); }
+
+    .spec-sheet {
+      display: none; background: rgba(0,0,0,0.2); padding: 1.5rem; 
+      border-radius: 16px; margin-top: 1rem; border: 1px solid var(--glass-border);
+    }
+    .spec-sheet.open { display: block; animation: fadeUp 0.4s ease forwards; }
+    .spec-sheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .spec-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.02); font-size: 10px; }
+    .spec-item-key { color: var(--text-tertiary); letter-spacing: 1px; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase;}
+    .spec-item-val { color: var(--text-secondary); text-align: right; }
+
+    .card-footer { margin-top: 1rem; padding-top: 1rem;}
     .buy-btn {
       width: 100%;
       background: var(--text-primary);
@@ -474,7 +509,6 @@
 </head>
 <body>
 
-  <!-- NAVIGATION -->
   <nav>
     <div class="logo">STATIONERY HUB</div>
     <div class="nav-links">
@@ -490,7 +524,6 @@
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
   <div class="hero reveal">
     <div class="hero-tag">Precision Informatics — 2026</div>
     <div class="hero-title">Data-driven<br>reviews for serious writers.</div>
@@ -502,7 +535,6 @@
     </div>
   </div>
 
-  <!-- PRODUCT GRID -->
   <div class="section reveal" id="pencils">
     <div class="section-header">
       <div class="section-tag">Mechanical Pencils</div>
@@ -518,11 +550,9 @@
       <button class="filter-btn">UNI</button>
     </div>
     <div id="productGrid" class="product-grid">
-      <!-- Injected by JS -->
-    </div>
+      </div>
   </div>
 
-  <!-- COMPARE TABLE -->
   <div class="section reveal" id="compare">
     <div class="section-header">
       <div class="section-tag">Side-by-Side Comparison</div>
@@ -542,13 +572,11 @@
           </tr>
         </thead>
         <tbody id="compareBody">
-          <!-- Injected by JS -->
-        </tbody>
+          </tbody>
       </table>
     </div>
   </div>
 
-  <!-- CALCULATORS -->
   <div class="section reveal" id="calculators">
     <div class="section-header">
       <div class="section-tag">Interactive Tools</div>
@@ -559,7 +587,6 @@
       <button class="calc-tab" onclick="switchCalc('fatigue', this)">Fatigue Predictor</button>
     </div>
 
-    <!-- CALC 1: Smoothness -->
     <div class="calc-panel active" id="calc-smoothness">
       <div class="calc-header">
         <div class="calc-tag">FORMULA 01</div>
@@ -614,7 +641,6 @@
       </div>
     </div>
 
-    <!-- CALC 2: Fatigue -->
     <div class="calc-panel" id="calc-fatigue">
       <div class="calc-header">
         <div class="calc-tag">FORMULA 02</div>
@@ -667,7 +693,6 @@
     </div>
   </div>
 
-  <!-- LOGIN MODAL -->
   <div class="modal" id="loginModal">
     <div class="modal-box">
       <button class="close-modal">✕</button>
@@ -677,9 +702,6 @@
     </div>
   </div>
 
-  <!-- ==========================================================================
-       THE JAVASCRIPT ENGINE
-       ========================================================================== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -728,7 +750,7 @@
           loginModal.classList.remove('active');
           setTimeout(() => loginModal.style.display = 'none', 400);
         } catch (error) {
-          console.log("Login failed or popup blocked. Note: iFrames may block Popups.", error);
+          console.log("Login failed or popup blocked.", error);
         }
       });
     }
@@ -746,13 +768,43 @@
       }
     });
 
-    // 3. PRODUCT DATA (Injected for preview)
+    // 3. FULL PRODUCT DATA (Restored)
     const STATIC_PRODUCTS = [
-      {name:"Rotring 600",brand:"ROTRING",weight:22,cog:"Front-Heavy",gripDia:"8.1mm",lead:"0.5mm",priceUSD:31.50, body: "Brass", bestFor:"Technical drafting", headline:"Demands wrist adaptation — rewarding writers who master it with zero barrel flex."},
-      {name:"Rotring 800",brand:"ROTRING",weight:22,cog:"Front-Heavy",gripDia:"8.2mm",lead:"0.5mm",priceUSD:61.00, body: "Aluminum", bestFor:"Mobile professionals", headline:"Retractable sleeve solves the 600's only structural weakness without sacrificing precision."},
-      {name:"Pentel GraphGear 1000",brand:"PENTEL",weight:20,cog:"Balanced",gripDia:"9.5mm",lead:"0.5mm",priceUSD:12.25, body: "Al + Brass", bestFor:"All grip styles", headline:"Multi-material construction distributes mass for a balanced CoG that accommodates all grips."},
-      {name:"Staedtler 925-25",brand:"STAEDTLER",weight:17,cog:"Balanced",gripDia:"8.8mm",lead:"0.7mm",priceUSD:13.50, body: "Aluminum", bestFor:"Artists & sketchers", headline:"Minimises inertia for rapid hatching; grade indicator window is a functional differentiator."},
-      {name:"Kuru Toga Advance",brand:"UNI",weight:12,cog:"Rear-Balanced",gripDia:"10.3mm",lead:"0.7mm",priceUSD:8.50, body: "Plastic", bestFor:"Note-taking", headline:"Mechanism rotates lead every 20 strokes — maintaining conical tip geometry."}
+      {
+        name: "Rotring 600 Black", brand: "ROTRING", weight: 22, cog: "Front-Heavy", gripDia: "8.1mm", lead: "0.5mm", priceUSD: 31.50, 
+        body: "Brass", length: "14.1cm", sleeve: "4.2mm (Fixed)", grip: "Knurled Brass", bestFor: "Technical drafting", 
+        headline: "At 22g with a brass barrel, the front-heavy CoG demands wrist adaptation — rewarding writers who master it with zero barrel flex.", 
+        pros: ["Brass body eliminates flex under high-pressure strokes","Knurled grip at 8.1mm suits narrow tripod technique","4.2mm fixed sleeve enables T-square alignment"], 
+        cons: ["Front-heavy CoG fatigues tripod grip past 45 minutes","No cushion mechanism — lead breaks under heavy pressure"]
+      },
+      {
+        name: "Rotring 800 Silver", brand: "ROTRING", weight: 22, cog: "Front-Heavy", gripDia: "8.2mm", lead: "0.5mm", priceUSD: 61.00, 
+        body: "Aluminum", length: "13.3cm", sleeve: "4.1mm (Retractable)", grip: "Knurled Aluminum", bestFor: "Mobile professionals", 
+        headline: "The 800's retractable sleeve solves the 600's only structural weakness — pocket safety — without sacrificing precision.", 
+        pros: ["Retractable sleeve prevents tip damage in transit","8.2mm grip accommodates wider finger placements","Aluminum body reduces cold-transmission vs brass"], 
+        cons: ["$29.50 premium over 600 for marginal ergonomic gain","Retract mechanism adds minor play during precision use"]
+      },
+      {
+        name: "Pentel GraphGear 1000", brand: "PENTEL", weight: 20, cog: "Balanced", gripDia: "9.5mm", lead: "0.5mm", priceUSD: 12.25, 
+        body: "Al + Brass", length: "14.9cm", sleeve: "4.0mm (Fixed)", grip: "Knurled Brass + Silicone", bestFor: "All grip styles", 
+        headline: "Multi-material construction distributes mass for a balanced CoG that accommodates all grip styles at 20g.", 
+        pros: ["9.5mm grip reduces pinch pressure for palmar style writers","Silicone-brass grip maintains grip in humid conditions","Retractable tip via clip mechanism — unique safety design"], 
+        cons: ["9.5mm grip too wide for precise tripod technique","Silicone grip degrades under prolonged hand-oil exposure"]
+      },
+      {
+        name: "Staedtler 925-25", brand: "STAEDTLER", weight: 17, cog: "Balanced", gripDia: "8.8mm", lead: "0.7mm", priceUSD: 13.50, 
+        body: "Aluminum", length: "14.3cm", sleeve: "4.1mm (Fixed)", grip: "Knurled Aluminum", bestFor: "Artists & sketchers", 
+        headline: "At 17g — lightest in lineup — the 925-25 minimises inertia for rapid hatching; grade indicator window is a functional differentiator.", 
+        pros: ["17g mass minimises fatigue for high-frequency sketching","Grade indicator window eliminates lead confusion mid-session","0.7mm reduces break frequency on textured paper"], 
+        cons: ["Aluminum body transmits cold — discomfort below 20°C","0.7mm not suitable for fine technical line work"]
+      },
+      {
+        name: "Uni Kuru Toga Advance", brand: "UNI", weight: 12, cog: "Rear-Balanced", gripDia: "10.3mm", lead: "0.7mm", priceUSD: 8.50, 
+        body: "Plastic", length: "13.9cm", sleeve: "3.3mm (Sliding)", grip: "Plastic (Clear)", bestFor: "Note-taking", 
+        headline: "W Speed rotation mechanism rotates lead every 20 strokes — maintaining conical tip geometry that eliminates wedge-shaped wear patterns.", 
+        pros: ["Rotation every 20 strokes maintains consistent line width","Sliding sleeve retracts as lead depletes — no clicking","12g — lightest in lineup — near-zero wrist fatigue"], 
+        cons: ["Plastic body transmits all paper texture feedback to hand","10.3mm grip strains pinch grip in extended technical work"]
+      }
     ];
 
     function renderCards() {
@@ -769,6 +821,29 @@
           <div class="spec-row"><div class="spec-lbl">WEIGHT</div><div class="spec-bar-track"><div class="spec-bar-fill" style="width:${(p.weight/25)*100}%"></div></div><div class="spec-val">${p.weight}g</div></div>
           <div class="spec-row"><div class="spec-lbl">GRIP DIA.</div><div class="spec-bar-track"><div class="spec-bar-fill" style="width:${(parseFloat(p.gripDia)/11)*100}%"></div></div><div class="spec-val">${p.gripDia}</div></div>
           <div class="spec-row"><div class="spec-lbl">LEAD</div><div class="spec-bar-track"><div class="spec-bar-fill" style="width:70%"></div></div><div class="spec-val">${p.lead}</div></div>
+          
+          <div class="pros-cons">
+            <div class="pros">
+              <div class="pc-label">TECHNICAL PROS</div>
+              <ul class="pc-list">${p.pros.map(x=>`<li>${x}</li>`).join('')}</ul>
+            </div>
+            <div class="cons">
+              <div class="pc-label">TECHNICAL CONS</div>
+              <ul class="pc-list">${p.cons.map(x=>`<li>${x}</li>`).join('')}</ul>
+            </div>
+          </div>
+
+          <button class="toggle-specs" onclick="toggleSpec(this)">▸ FULL SPEC SHEET</button>
+          <div class="spec-sheet">
+            <div class="spec-sheet-grid">
+              <div class="spec-item"><span class="spec-item-key">BODY MAT.</span><span class="spec-item-val">${p.body}</span></div>
+              <div class="spec-item"><span class="spec-item-key">GRIP MAT.</span><span class="spec-item-val">${p.grip}</span></div>
+              <div class="spec-item"><span class="spec-item-key">SLEEVE</span><span class="spec-item-val">${p.sleeve}</span></div>
+              <div class="spec-item"><span class="spec-item-key">LENGTH</span><span class="spec-item-val">${p.length}</span></div>
+              <div class="spec-item"><span class="spec-item-key">CoG POS.</span><span class="spec-item-val">${p.cog}</span></div>
+              <div class="spec-item"><span class="spec-item-key">BEST FOR</span><span class="spec-item-val">${p.bestFor}</span></div>
+            </div>
+          </div>
           
           <div class="card-footer">
             <button class="buy-btn">ACQUIRE INTEL →</button>
@@ -810,7 +885,14 @@
       window.requestAnimationFrame(step);
     }
 
-    // 5. CALCULATOR LOGIC (Exposed to window for inline onclicks)
+    // Spec Sheet Toggle
+    window.toggleSpec = function(btn) {
+      const sheet = btn.nextElementSibling;
+      const open = sheet.classList.toggle('open');
+      btn.textContent = open ? '▾ HIDE SPEC SHEET' : '▸ FULL SPEC SHEET';
+    };
+
+    // 5. CALCULATOR LOGIC
     window.switchCalc = function(id, btn) {
       document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
@@ -844,7 +926,7 @@
       const c = +document.getElementById('f_cog').value;
       const g = +document.getElementById('f_grip').value;
       const s = +document.getElementById('f_session').value;
-      const score = Math.min(120, Math.max(10, 60 - w + c + g + s + 3)); // Simplified logic
+      const score = Math.min(120, Math.max(10, 60 - w + c + g + s + 3)); 
       
       animateValue('f_score', 0, score, 800);
       setTimeout(() => document.getElementById('f_bar').style.width = Math.min(100, (score/120)*100) + '%', 100);
