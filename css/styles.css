@@ -155,3 +155,118 @@ nav {
   margin-top: 4px;
   text-transform: uppercase;
 }
+/* ==========================================================================
+   4. PRODUCT GRID & PREMIUM CARDS
+   ========================================================================== */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* THE CARD: This is where the magic happens */
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px; /* Soft, large corners like an iPhone */
+  padding: 2rem;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); /* Apple's signature smooth curve */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hover Effect: The card should feel like it's lifting toward the user */
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: var(--bg-tertiary);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-brand {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.card-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+/* Technical Specs within the card */
+.spec-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 40px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.spec-lbl {
+  font-size: 9px;
+  color: var(--text-tertiary);
+  letter-spacing: 1px;
+}
+
+.spec-bar-track {
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+}
+
+.spec-bar-fill {
+  height: 100%;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: width 1s ease-in-out;
+}
+
+.spec-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  text-align: right;
+}
+
+/* Premium Buy Button */
+.buy-btn {
+  margin-top: 2rem;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.buy-btn:hover {
+  background: var(--accent);
+  transform: scale(1.05);
+}
